@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+
+{% block main_block %}
+    <div id="submit_url">
+        <style>
+            #input_url {
+                font-size: 16px;
+                width: 650px;
+                height: 25px;
+                border: 1px solid #008EAF ;
+            }
+            #get_shorten {
+                height: 25px;
+                size: 25px;
+            }
+        </style>
+
+
+
+        <form id="get_shorten_form" method="post" action="{% url 'main:get_shorten_api' %}">
+            <input id="input_url" name="url" placeholder="在这里输入你想缩短或增长的链接" value="">
+            <input id="get_shorten" type="submit">
+        </form>
+
+        <script>
+            $(function(){
+                $("#get_shorten_form").submit(
+                    function(){
+                        $.post("{% url 'main:get_shorten_api' %}",
+                            {"url": $("#input_url").val()},
+                            function(data, status){
+                                $("#result").html(data);
+                                if(status === "success") {
+                                    $("#input_url").val("");
+                                }
+                            }
+                        );
+                        return false;
+                    }
+                )
+            })
+        </script>
+    </div>
+
+
+    <div id="result">
+    {% if from_url %}
+        <p style="padding-top: 25px">你访问的 <strong>{{ from_url }}</strong> 不存在，<br>
+        可能是本来就不存在或已过期。</p>
+    {% endif %}
+    </div>
+
+
+
+    <p style="padding-top: 150px"></p>
+    <span id="ddd" style="display:block;padding-top:40%;text-decoration: none;
+    text-align: center;font-size: 0.8em;font-color: #0083AB"><a>说明</a></span>
+
+    <script>
+        $(function(){
+            $("#about").hide();
+            $("#ddd").mousedown(function(){
+                $("#about").show(600,function(){$("#ddd").hide(400)});
+            })
+        })
+    </script>
+
+    <div id="about">
+        <p>这边是 <i>Hugefiver</i> 做的链接转换服务。</p>
+        <p>默认情况下生成的链接有效期仅为 <b>24 Hours</b> ，<wbr>也有可能由于各种原因增长或减短。</p>
+        <strong>本站随时可能变为不可用状态，<wbr>作者不为因使用本站服务产生的损失负任何责任。</strong>
+        <p>请不要使用本站服务做任何违反中华人民共和国相关法规的行为，<wbr>本人不为此负任何责任。</p>
+        <p>祝使用愉快。</p>
+    </div>
+{% endblock %}

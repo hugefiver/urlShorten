@@ -1,0 +1,16 @@
+<div style="padding-top: 25px">
+{% ifequal status 0 %}
+    <p>您的短链接是: </p>
+    <p>{{ stat_msg }}</p>
+{% else %}
+    {% ifequal status 1 %}
+        <p>链接已存在，已更新到期时间: </p>
+        <p>{{ stat_msg }}</p>
+    {% else %}
+        <!--<strong>出错啦！</strong>-->
+        <b>有点问题</b>
+        <p>状态码: <b>{{ status }} </b></p>
+        <p>服务器说： {{ stat_msg }}</p>
+    {% endifequal %}
+{% endifequal %}
+</div>

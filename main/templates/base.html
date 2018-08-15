@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HF不太短链接生成系统</title>
+
+    <style>
+        #ti {
+            text-align: center;
+            color: #60C8E6;
+            font-size: 1.3em;
+            width: 100%;
+        }
+        html,body {
+            height: 100%;
+        }
+        footer {
+            text-align: center;
+            text-decoration-line: none;
+            font-size: 0.8em;
+            margin-top: 50px;
+            margin-bottom: 10px;
+            height: 50px;
+            width: 100%;
+            /*bottom: 0;*/
+            position: absolute;
+        }
+        #main_body {
+            text-align: center;
+            padding-top: 50px;
+        }
+    </style>
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+<header id="ti">
+    <h1>HF的不太短链接生成系统</h1>
+</header>
+
+<div id="main_body">
+{% block main_block %}
+
+{% endblock %}
+</div>
+
+<footer style="border-bottom: 10px;height: 50px">
+    <p>2018 &copy; Hugefiver</p>
+</footer>
+
+</body>
+</html>
