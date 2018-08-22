@@ -9,5 +9,8 @@ class LinkURL(models.Model):
     update_time = models.DateTimeField('创建更改时间', auto_now_add=True)
     end_time = models.DateTimeField('失效时间')
 
+    def __str__(self):
+        return url
+
     class META:
         models.Model.ordering = ['update_time']

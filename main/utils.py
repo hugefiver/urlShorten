@@ -10,12 +10,7 @@ random_seed = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 def clean_out_time_urls():
     now = datetime.datetime.now()
-    while True:
-        try:
-            out_time_list = LinkURL.objects.filter(end_time__lte=now).get()
-            out_time_list.delete()
-        except LinkURL.DoesNotExist:
-            break
+    LinkURL.objects.filter(end_time__lte=now).delete()
 
 
 def get_md5(string: str):

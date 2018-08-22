@@ -15,7 +15,8 @@ from .models import LinkURL
 def get_shorten(request):
     context = {}
     clean_out_time_urls()
-    BASE_HOST = request.scheme + '://' + request.get_host() + '/'
+    # BASE_HOST = request.scheme + '://' + request.get_host() + '/'
+    BASE_HOST = 'https://' + request.get_host() + '/'
 
     if request.method == 'POST':
         context['status'] = 0
@@ -37,7 +38,7 @@ def get_shorten(request):
                 context['status'] = 252
                 context['stat_msg'] = '请输入链接。'
             elif not url.startswith(('http://', 'https://', 'ftp://',
-                                     'ftp://', 'ed2k://', 'smb://')):
+                                     'sftp://', 'ed2k://', 'smb://')):
                 # 输入非合法链接 [ERROR 251]
                 context['status'] = 251
                 context['stat_msg'] = '请输入正确的链接。'
@@ -84,7 +85,8 @@ def get_shorten(request):
 
 
 def service_redirect(request, srt_code):
-    BASE_HOST = request.scheme + '://' + request.get_host() + '/'
+    # BASE_HOST = request.scheme + '://' + request.get_host() + '/'
+    BASE_HOST = 'https://' + request.get_host() + '/'
     try:
         o = LinkURL.objects.get(short_code=srt_code)
         return HttpResponseRedirect(o.url)
